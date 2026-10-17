@@ -12,9 +12,13 @@ class DiceApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Dice App',
+      title: 'Almafwil DiceApp',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color(0xFF3A1FA8),
+          primary: const Color(0xFF3A1FA8),
+          secondary: const Color(0xFFFFB703),
+        ),
         useMaterial3: true,
       ),
       home: const DicePage(),
@@ -48,92 +52,105 @@ class _DicePageState extends State<DicePage> {
   Widget build(BuildContext context) {
     int total = leftDiceNumber + rightDiceNumber;
 
-    return Scaffold(
-      backgroundColor: Colors.red.shade800,
-      appBar: AppBar(
-        title: const Text(
-          'Dice App',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            Color(0xFF6D3BFF), // Electric violet
+            Color(0xFF3A1FA8), // Deep indigo
+            Color(0xFF1A0F5E), // Midnight indigo
+          ],
         ),
-        centerTitle: true,
-        backgroundColor: Colors.red.shade900,
-        elevation: 4,
       ),
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Total Score Card
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.2),
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: Colors.white.withValues(alpha: 0.4), width: 1.5),
-                ),
-                child: Text(
-                  'Total: $total',
-                  style: const TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    letterSpacing: 1.2,
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          title: const Text(
+            'Almafwil DiceApp',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+        ),
+        body: SafeArea(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // Total Score Card
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withValues(alpha: 0.2),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.white.withValues(alpha: 0.4), width: 1.5),
                   ),
-                ),
-              ),
-              const SizedBox(height: 40),
-
-              // Dice Row containing the two interactive dice images
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Row(
-                  children: [
-                    // Left Dice
-                    Expanded(
-                      child: TextButton(
-                        onPressed: rollDice,
-                        child: Image.asset('assets/dice$leftDiceNumber.png'),
-                      ),
+                  child: Text(
+                    'Total: $total',
+                    style: const TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      letterSpacing: 1.2,
                     ),
-                    const SizedBox(width: 16),
-                    // Right Dice
-                    Expanded(
-                      child: TextButton(
-                        onPressed: rollDice,
-                        child: Image.asset('assets/dice$rightDiceNumber.png'),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
-              ),
-              const SizedBox(height: 50),
+                const SizedBox(height: 40),
 
-              // Roll Dice Button
-              ElevatedButton.icon(
-                onPressed: rollDice,
-                icon: const Icon(Icons.casino, size: 28, color: Colors.red),
-                label: const Text(
-                  'Roll Dice',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.red,
+                // Dice Row containing the two interactive dice images
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    children: [
+                      // Left Dice
+                      Expanded(
+                        child: TextButton(
+                          onPressed: rollDice,
+                          child: Image.asset('assets/dice$leftDiceNumber.png'),
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      // Right Dice
+                      Expanded(
+                        child: TextButton(
+                          onPressed: rollDice,
+                          child: Image.asset('assets/dice$rightDiceNumber.png'),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
+                const SizedBox(height: 50),
+
+                // Roll Dice Button with secondary accent color (Amber)
+                ElevatedButton.icon(
+                  onPressed: rollDice,
+                  icon: const Icon(Icons.casino, size: 28, color: Color(0xFF1A0F5E)),
+                  label: const Text(
+                    'Roll Dice',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF1A0F5E),
+                    ),
                   ),
-                  elevation: 5,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFFFFB703), // Accent color (Amber)
+                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    elevation: 5,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
